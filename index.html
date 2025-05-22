@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Contact List View -->
+    <div id="contactListView">
+        <h1>Contacts</h1>
+        <button id="addNewContactBtn">Add New Contact</button>
+        <table id="contactsTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Company</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Contact rows will be inserted here by JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Contact Form View (Create/Edit) -->
+    <div id="contactFormView" style="display:none;">
+        <h2 id="formTitle">Add Contact</h2>
+        <form id="contactForm">
+            <input type="hidden" id="contactId">
+            <div>
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" required>
+            </div>
+            <div>
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" required>
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+            </div>
+            <div>
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone">
+            </div>
+            <div>
+                <label for="company">Company:</label>
+                <input type="text" id="company">
+            </div>
+            <button type="submit">Save</button>
+            <button type="button" id="cancelBtn">Cancel</button>
+        </form>
+    </div>
+
+    <!-- Contact Detail View -->
+    <div id="contactDetailView" style="display:none;">
+        <h2 id="detailViewTitle">Contact Details</h2>
+        <p><strong>Name:</strong> <span id="detailName"></span></p>
+        <p><strong>Email:</strong> <span id="detailEmail"></span></p>
+        <p><strong>Phone:</strong> <span id="detailPhone"></span></p>
+        <p><strong>Company:</strong> <span id="detailCompany"></span></p>
+        <p><strong>Created At:</strong> <span id="detailCreatedAt"></span></p>
+        <p><strong>Updated At:</strong> <span id="detailUpdatedAt"></span></p>
+        <button id="editContactBtn">Edit</button>
+        <button id="deleteContactBtn">Delete</button>
+        <button id="backToListBtn">Back to List</button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
