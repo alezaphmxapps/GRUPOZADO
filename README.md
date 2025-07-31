@@ -1,72 +1,79 @@
-# Contact Management Prototype
+# Proyecto: Segmentación de Clientes con Base de Datos para Inteligencia Artificial
 
-This is a basic prototype of a Contact Management module with a web-based UI and a Python Flask backend. It supports CRUD (Create, Read, Update, Delete) operations for contacts, with data stored in a JSON file.
+Este proyecto es una solución de software que realiza una segmentación de clientes utilizando un análisis RFM (Recencia, Frecuencia, Gasto Monetario) y un algoritmo de clustering K-Means. El sistema está construido en Python y utiliza una base de datos SQLite para el almacenamiento de datos.
 
-## Prerequisites
+El propósito es identificar distintos grupos de clientes basados en su comportamiento de compra, permitiendo a una empresa dirigir estrategias de marketing de manera más efectiva.
 
-*   **Python 3.x installed:** Ensure you have Python 3 installed on your system. You can download it from [python.org](https://www.python.org/).
-*   **Flask and Flask-CORS installed:** These Python packages are required for the backend server. You can install them using pip:
-    ```bash
-    pip install Flask Flask-CORS
-    ```
+## Características Principales
 
-## Project Files
+*   **Base de Datos Relacional**: Utiliza SQLite para almacenar datos de clientes, productos y ventas.
+*   **Consultas SQL Estratégicas**: Incluye 8 consultas SQL complejas para extraer insights del negocio.
+*   **Segmentación con IA**: Aplica el algoritmo K-Means para agrupar clientes en segmentos significativos (ej. "Campeones", "Potenciales", "En Riesgo").
+*   **Visualización de Datos**: Genera gráficos (scatter plots y bar charts) para visualizar los segmentos y sus características.
+*   **Orquestación Completa**: Un script principal (`main.py`) que ejecuta todo el flujo de trabajo, desde la creación de la base de datos hasta la generación de visualizaciones.
 
-The key files in this prototype are:
+## Estructura del Proyecto
 
-*   `server.py`: The Flask backend server that handles API requests and data storage.
-*   `index.html`: The main frontend HTML file that provides the user interface.
-*   `style.css`: CSS styles for the frontend.
-*   `app.js`: JavaScript for frontend logic, including API interactions and UI updates.
-*   `contacts.json`: The JSON file where contact data is stored. This file will be created automatically in the same directory as `server.py` if it doesn't exist when the server starts.
+```
+.
+├── customer_data.db      # Base de datos SQLite (generada al ejecutar)
+├── database/
+│   ├── schema.sql        # Script SQL para crear la estructura de la BD
+│   └── seed_data.sql     # Script SQL para poblar la BD con datos de prueba
+├── main.py               # Script principal para ejecutar todo el proyecto
+├── README.md             # Este archivo
+├── requirements.txt      # Dependencias de Python
+├── src/
+│   ├── database_setup.py # Script para inicializar la base de datos
+│   ├── queries.py        # Script con las 8 consultas SQL estratégicas
+│   └── segmentation.py   # Script para la segmentación con IA y visualización
+└── visualizations/       # Directorio donde se guardan los gráficos (generado)
+    ├── segment_characteristics.png
+    └── segment_scatter_plot.png
+```
 
-### Planning Documents (Contextual)
-The following documents were created during the planning and specification phase of this prototype and provide additional context:
-*   `Contact_Management_Prototype_Scope.md`: Defines the features and fields for this prototype.
-*   `Contact_Management_Prototype_UI_Layout.md`: Describes the UI layout for the different views.
-*   `Contact_Management_Prototype_Tech_Stack.md`: Outlines the technology choices for the prototype.
+## Requisitos
 
-## Running the Prototype
+*   Python 3.x
+*   pip (manejador de paquetes de Python)
 
-Follow these steps to set up and run the application:
+## Cómo Empezar
 
-### Step 1: Start the Backend Server
+Siga estos pasos para configurar y ejecutar el proyecto en su entorno local.
 
-1.  Open a terminal or command prompt.
-2.  Navigate to the directory where the `server.py` file is located.
-3.  Run the backend server using the following command:
-    ```bash
-    python server.py
-    ```
-4.  The server will start, and you should see output indicating it's running. By default, it will run on `http://localhost:5001`.
-    *   Example output: `* Running on http://127.0.0.1:5001/ (Press CTRL+C to quit)`
+### 1. Clonar el Repositorio
 
-### Step 2: Access the Frontend
+Primero, clone este repositorio en su máquina local:
+```bash
+git clone <URL_DEL_REPOSITORIO>
+cd <NOMBRE_DEL_DIRECTORIO>
+```
 
-1.  Open your preferred web browser (e.g., Chrome, Firefox, Edge, Safari).
-2.  Open the `index.html` file directly in your browser. You can usually do this by:
-    *   Navigating to the project directory in your file explorer and double-clicking `index.html`.
-    *   Dragging the `index.html` file from your file explorer into an open browser window.
-    *   Using the browser's "File > Open" or "File > Open File..." menu and selecting `index.html`.
+### 2. Instalar Dependencias
 
-    The application should now be loaded and ready to use. The frontend will communicate with the backend server running at `http://localhost:5001`.
+Instale todas las librerías de Python necesarias utilizando el archivo `requirements.txt`. Se recomienda crear un entorno virtual primero.
 
-## How to Use
+```bash
+# Crear y activar un entorno virtual (opcional pero recomendado)
+python -m venv venv
+source venv/bin/activate  # En Windows: venv\Scripts\activate
 
-Once the frontend is loaded in your browser and the backend server is running:
+# Instalar las dependencias
+pip install -r requirements.txt
+```
 
-*   **View Contacts:** The main page displays a list of contacts. If it's the first time running, this list will be empty.
-*   **Add a Contact:** Click the "Add New Contact" button to open a form. Fill in the details and click "Save".
-*   **Manage Contacts:** For each contact in the list, you will see action buttons:
-    *   **View Details:** Click to see all information for that contact.
-    *   **Edit:** Click to modify the contact's information.
-    *   **Delete:** Click to remove the contact (a confirmation prompt will appear).
+### 3. Ejecutar el Proyecto
 
-## Stopping the Application
+Una vez instaladas las dependencias, puede ejecutar el proyecto completo con un solo comando:
 
-*   **Backend Server:** To stop the Flask backend server, go to the terminal window where it is running and press `Ctrl+C`.
-*   **Frontend:** Simply close the browser tab or window where `index.html` is open.
+```bash
+python main.py
+```
 
----
+El script `main.py` se encargará de todo:
+1.  Creará y poblará la base de datos (`customer_data.db`) si no existe.
+2.  Ejecutará las 8 consultas SQL y mostrará los resultados en la consola.
+3.  Realizará la segmentación de clientes y guardará los resultados en la base de datos.
+4.  Creará los gráficos de visualización y los guardará en la carpeta `visualizations/`.
 
-This README provides the necessary information to get the Contact Management prototype up and running. Enjoy testing the application!
+¡Y eso es todo! Ahora puede revisar los resultados en la consola y los gráficos en la carpeta `visualizations`.
